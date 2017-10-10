@@ -44,8 +44,20 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
+        String[] list = corpus.split("\n");
+        String[] compressed = new String[corpus.length()];
+        String fin = "";
+        fin += "0," + list[0] + "\n";
+        for (int i = 1; i < list.length; i++) {
+            int hey = longestPrefix(list[i], list[i - 1]);
+            if (hey > 0) {
+            fin += "" + hey + "," + list[i].substring(hey, list[i].length()) + "\n";
+            } else {
+                fin += "0," + list[i] + "\n";
+            }
+        }
 
-        return "";
+        return fin;
     }
 
     /**
@@ -82,7 +94,21 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
-        return 0;
+       int act = 0;
+       int fin = 0;
+        if(firstString.length() <= secondString.length()) {
+            act = firstString.length();
+        }else {
+            act = secondString.length();
+        }
+        for(int i = 0; i < act; i++) {
+            if(firstString.charAt(i) == secondString.charAt(i)) {
+                fin ++;
+            }else {
+                break;
+            }
+        }
+        return fin;
     }
 
     /**
@@ -98,6 +124,8 @@ public class FrontCompression {
         /*
          * The magic 6 lines that you need in Java to read stuff from a file.
          */
+        String i = "a", o = "divs";
+        System.out.println(longestPrefix(i,o));
         String words = null;
         String wordsFilePath = FrontCompression.class.getClassLoader().getResource("words.txt")
                 .getFile();
@@ -110,6 +138,8 @@ public class FrontCompression {
         String originalWords = words;
         String compressedWords = compress(words);
         String decompressedWords = decompress(compressedWords);
+
+        System.out.println(compress(words));
 
         if (decompressedWords.equals(originalWords)) {
             System.out.println("Original length: " + originalWords.length());
@@ -141,5 +171,6 @@ public class FrontCompression {
                 }
             }
         }
+
     }
 }
