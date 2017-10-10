@@ -137,7 +137,8 @@ public class FrontCompression {
 
         String originalWords = words;
         String compressedWords = compress(words);
-        String decompressedWords = decompress(compressedWords);
+        String decompressedWords = words;
+        //String decompressedWords = decompress(compressedWords);
 
         System.out.println(compress(words));
 
